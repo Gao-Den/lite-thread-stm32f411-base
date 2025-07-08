@@ -19,7 +19,7 @@ To approach this model, learners need to have basic knowledge of data structures
 
 ### 1. Active Object Design Pattern
 <div style="text-align: center;">
-    <img src="images/active-object-model.png" width="450"/>
+    <img src="images/active-object-model.png" width="500"/>
 </div>
 
 Active objects (a.k.a. actors) are event-driven, strictly encapsulated software objects endowed with their
@@ -45,7 +45,7 @@ hazards within a thread itself.
 
 **Task priority mask**
 <div style="text-align: center;">
-    <img src="images/active-object-priority-mask.png" width="350"/>
+    <img src="images/active-object-priority-mask.png" width="400"/>
 </div>
 
 - When a message is published to the publish-subscribe event bus, the kernel determines which Active Object(s) are subscribed to that message. It then sets the corresponding priority mask bit(s) to "on", indicating that those Active Objects are ready for execution.
@@ -80,7 +80,7 @@ Timers in event-driven systems operate on the following principle:
 - The timer heartbeat is handled by a real timer on the microcontroller (system tick timer, hardware timer, user custom timer,...).
 
 <div style="text-align: center;">
-    <img src="images/timer-service.png" width="400"/>
+    <img src="images/timer-service.png" width="450"/>
 </div>
 
 - During application development, with the convenience of this timer service, the timer can be called and deleted anywhere, even during run-time.
