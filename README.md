@@ -1,22 +1,25 @@
 ## Lite Thread Kernel
-Lite Thread is built as a framework to manage execution tasks in embedded software development on microcontrollers. Built on Active Objects design pattern architecture with the following advantages:
-- Low memory usage
-- Modularized, operates independently of the microcontroller's driver library
-- Easy porting on different microcontroller lines, helping users to quickly develop applications.
+Lite Thread is a lightweight framework designed to manage task execution in embedded systems on microcontrollers. It is architected based on the Active Object design pattern, offering several key advantages:
+
+- Low code size
+- Modular architecture, independent of any specific microcontroller driver library
+- High portability, enabling rapid application development across various microcontroller families
+
+Lite Thread is intended to operate in bare-metal (non-RTOS) environments, where it provides an event-driven service layer that sits above the hardware library layer, facilitating clean separation between application logic and low-level hardware operations.
 
 In this model, **Lite Thread** is built to work with a bare-metal project (non-OS), with an event-driven service layer located above the **hardware service** layer.
 <div style="text-align: center;">
-    <img src="images/event-driven-service.png" width="250"/>
+    <img src="images/event-driven-service.png" width="300"/>
 </div>
 
-To approach this model, learners need to have basic knowledge of data structures: Linked list, queue, pool memory, OOP. This commit will include the following contents:
+To approach this model, learners need to have basic knowledge of data structures: Linked list, queue, pool memory, OOP in C. This commit will include the following contents:
 - Pool memory
 - Post & handling messages mechanisms
 - Timer list
 
 ### 1. Active Object Design Pattern
 <div style="text-align: center;">
-    <img src="images/active-object-model.png" width="500"/>
+    <img src="images/active-object-model.png" width="450"/>
 </div>
 
 Active objects (a.k.a. actors) are event-driven, strictly encapsulated software objects endowed with their
@@ -35,32 +38,50 @@ an event loop.
 hazards within a thread itself.
 
 ### 2. Task - Signal Concept
-The scheduler works with the following idea:
+**Event queue**
+- The task scheduling model in Lite Thread is based on a priority-driven mechanism, supporting up to 8 distinct priority levels, ranging from lowest to highest. Each priority level is associated with a dedicated Active Object.
+
+- Every task control block (i.e., Active Object) maintains its own message queue to receive and process events independently. In cases where multiple tasks share the same priority level, they are managed collectively under a single Active Object instance.
+
+**Task priority mask**
 <div style="text-align: center;">
-    <img src="images/scheduler.png" width="750"/>
+    <img src="images/active-object-priority-mask.png" width="350"/>
 </div>
 
-**Event queue**
-- The task arrangement model is based on a priority-based mechanism, with 8 different priorities from low to high, each of which is represented by an active object.
-- Each task control block (active object) will have its own message queue. If the tasks have the same priority, it will be managed by an active object.
+- When a message is published to the publish-subscribe event bus, the kernel determines which Active Object(s) are subscribed to that message. It then sets the corresponding priority mask bit(s) to "on", indicating that those Active Objects are ready for execution.
+- Once an Active Object has processed all of its pending messages, its corresponding priority mask bit is cleared (set to "off"), indicating that it is no longer ready to run.
+
+Once an Active Object has processed all of its pending messages, its corresponding priority mask bit is cleared (set to "off"), indicating that it is no longer ready to run.
 
 **Event loop**
-- When a message is sent (message from the application, message from the ISR, ...), it will forward the message to the corresponding active object and set the mask to move the active object from idle state to ready to run.
-- The event loop will continuously check the priority mask table to determine that the active object with the highest priority is in the ready to run state.
-- If there are many active objects ready to run, it will let the active object with the higher priority run first. In the same active object, the message that arrives first will be processed first.
-- If all active objects are set to idle (ie all message queues are empty), it will run polling objects.
+<div style="text-align: center;">
+    <img src="images/scheduler.png" width="1000"/>
+</div>
+The Lite Thread scheduler operates based on the following concept:
+
+- **Step 1**: Upon entering the event loop, the kernel checks the message queues of all Active Objects to determine whether there are any pending messages to process.
+- **Step 2**: If no messages are available, the kernel executes all registered Polling Objects — these are simple, sequential code blocks typically equivalent to logic found in traditional main loops. Once polling is complete, the scheduler returns to Step 1.
+- **Step 3**: If there are pending messages, the scheduler prioritizes handling them over executing Polling Objects. It scans the priority mask to identify the highest-priority Active Object that is ready. The kernel then retrieves the next message from that Active Object’s queue and dispatches it to the corresponding task for execution.
+Each message contains an execution signal and may optionally include application-specific data, depending on the use case.
+After the message is processed, the system returns to Step 1 to continue checking for new messages.
+
+Message handling follows a **Run-to-Complete** (RTC) model — meaning that once a message begins execution, it runs to completion without being blocked or preempted by other events (i.e., fully non-blocking).
 
 ### 3. Timer service
 Timers in event-driven systems operate on the following principle:
+- When a timer node is installed, it is added to the timer list, which is implemented as a linked list structure.
+- A dedicated timer task, managed by an Active Object, is responsible for continuously traversing this list at runtime. - It checks each timer node to determine whether its expiration time has been reached. If a timer has expired, the timer task will dispatch a message to the corresponding task for execution.
+- This timer task runs continuously during runtime, ensuring timely delivery of timer-based events throughout the system.
+
 <div style="text-align: center;">
-    <img src="images/timer-service.png" width="700"/>
+    <img src="images/timer-task.png" width="600"/>
 </div>
 
-- When a timer node is installed, it will move this node to the timer list (this list is built based on the linked list).
+- The timer heartbeat is handled by a real timer on the microcontroller (system tick timer, hardware timer, user custom timer,...).
 
-- The timer task (managed by the active object) will perform the task of browsing this timer list to check if the timer of a node has expired. If so, it will dispatch a message to the corresponding task. This timer task will operate continuously during run-time.
-
-- The timer heartbeat is handled by a real timer on the microcontroller (system tick timer, hardware timer,...).
+<div style="text-align: center;">
+    <img src="images/timer-service.png" width="400"/>
+</div>
 
 - During application development, with the convenience of this timer service, the timer can be called and deleted anywhere, even during run-time.
 
