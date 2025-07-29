@@ -303,14 +303,14 @@ void* lt_malloc(size_t size) {
 
     if (lt_mem_addr != NULL) {
         if (((uint32_t)lt_mem_addr + size) > ((uint32_t)&__heap_end__)) {
-            FATAL("MALC", 0x01);
+            FATAL("MEM", 0x01);
         }
     }
 
     lt_mem_addr = malloc(size);
 
     if (lt_mem_addr == NULL) {
-        FATAL("MALC", 0x02);
+        FATAL("MEM", 0x02);
     }
 
     return lt_mem_addr;

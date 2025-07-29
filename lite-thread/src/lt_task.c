@@ -38,15 +38,15 @@ static void lt_kernel_banner();
 
 void lt_kernel_banner() {
     LT_LOG("\n\n\n");
-	LT_LOG(" __    __  ____  ____    ____  _  _  ____  ____   __   ____\n");
-	LT_LOG("(  )  (  )(_  _)(  __)  (_  _)/ )( \\(  _ \\(  __) / _\\ (    \\\n");
-	LT_LOG("/ (_/\\ )(   )(   ) _)     )(  ) __ ( )   / ) _) /    \\ ) D (\n");
-	LT_LOG("\\____/(__) (__) (____)   (__) \\_)(_/(__\\_)(____)\\_/\\_/(____/\n");
-	LT_LOG("\n");
-	LT_LOG("Kernel version: %s\n", LITE_THREAD_KERNEL_VERSION);
-	LT_LOG("Author: %s\n", "GaoDen");
-	LT_LOG("Build date: %s %s\n", __DATE__, __TIME__);
-	LT_LOG("\n");
+    LT_LOG(" __    __  ____  ____    ____  _  _  ____  ____   __   ____\n");
+    LT_LOG("(  )  (  )(_  _)(  __)  (_  _)/ )( \\(  _ \\(  __) / _\\ (    \\\n");
+    LT_LOG("/ (_/\\ )(   )(   ) _)     )(  ) __ ( )   / ) _) /    \\ ) D (\n");
+    LT_LOG("\\____/(__) (__) (____)   (__) \\_)(_/(__\\_)(____)\\_/\\_/(____/\n");
+    LT_LOG("\n");
+    LT_LOG("Kernel version: %s\n", LITE_THREAD_KERNEL_VERSION);
+    LT_LOG("Author: %s\n", "GaoDen");
+    LT_LOG("Build date: %s %s\n", __DATE__, __TIME__);
+    LT_LOG("\n");
     LT_LOG("-> Active objects ready\n\n");
 }
 
@@ -145,10 +145,10 @@ void task_post_pure_msg(task_id_t des_task_id, uint8_t signal) {
 }
 
 void task_post_common_msg(task_id_t des_task_id, uint8_t signal, uint8_t* data, uint8_t len) {
-	lt_msg_t* get_common_msg_from_pool = get_common_msg();
+    lt_msg_t* get_common_msg_from_pool = get_common_msg();
     get_common_msg_from_pool->signal = signal;
-	set_data_common_msg(get_common_msg_from_pool, data, len);
-	task_post(des_task_id, get_common_msg_from_pool);
+    set_data_common_msg(get_common_msg_from_pool, data, len);
+    task_post(des_task_id, get_common_msg_from_pool);
 }
 
 void task_post_dynamic_msg(task_id_t des_task_id, uint8_t signal, uint8_t* data, uint32_t len) {

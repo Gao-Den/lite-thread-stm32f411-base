@@ -8,5 +8,5 @@
 #include "lt_fsm.h"
 
 void fsm_dispatch(fsm_t* me, lt_msg_t* msg) {
-	me->state(msg);
+    me->state(msg);
 }

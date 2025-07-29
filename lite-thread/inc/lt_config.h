@@ -19,7 +19,7 @@ extern "C"
  * DEFINITION: lite thread version
  *
  *****************************************************************************/
-#define LITE_THREAD_KERNEL_VERSION              "1.4"
+#define LITE_THREAD_KERNEL_VERSION          "1.4"
 
 #define LT_DISABLE                          (0x00)
 #define LT_ENABLE                           (0x01)
@@ -37,7 +37,7 @@ extern "C"
  *
  *****************************************************************************/
 /* size of message pool */
-#define LT_PURE_MSG_POOL_SIZE               (16)
+#define LT_PURE_MSG_POOL_SIZE               (8)
 #define LT_COMMON_MSG_POOL_SIZE             (8)
 #define LT_COMMON_MSG_DATA_SIZE             (64)
 #define LT_DYNAMIC_MSG_POOL_SIZE            (8)
