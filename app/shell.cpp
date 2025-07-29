@@ -118,4 +118,3 @@ int32_t shell_dbg(uint8_t* argv) {
     
     return 0;
 }
-2
