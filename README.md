@@ -88,8 +88,167 @@ Timers in event-driven systems operate on the following principle:
 ### 4. Usage
 In this sample code, built on the Makefile project.
 Here are the instructions:
-- STM32Cube IDE: **Updating**
-- Arduino IDE: **Updating**
+### 4.1. STM32CubeIDE
+In this example, I use STM32F103C8T6 as an example for use
+
+**Step 1**: Create project
+
+Initialize the project as usual I use GPIO PC13 as indicator led and UART1 for console
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/inital-project.png" width="1000"/>
+</div>
+
+**Step 2**: Add **lite-thread** source folder
+- Add source folder
+- Add include path
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/copy-lite-thread-folder.png" width="1000"/>
+</div>
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/add-source-file.png" width="1000"/>
+</div>
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/select-source-file.png" width="1000"/>
+</div>
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/setting-include-path.png" width="1000"/>
+</div>
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/add-include-path.png" width="1000"/>
+</div>
+
+**Step 3**: Platform configuration  
+Go to the `lt_common.h` file and customize it to suit the platform you are using
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/config-platform.png" width="1000"/>
+</div>
+
+You can replace it with my example below
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/add-new-platform.png" width="1000"/>
+</div>
+
+Then press build to test the project to see if there are any errors
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/build-inital-project.png" width="1000"/>
+</div>
+
+**Step 4**: Use kernel  
+Add kernel header files to `main.h`
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/initial-kernel-include.png" width="1000"/>
+</div>
+
+**Kernel tick**  
+Set the position of the `timer_tick(1)` function in the System tick interrupt function of the system
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/add-timer-kernel-tick.png" width="1000"/>
+</div>
+Create common functions to run the kernel
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/inital-function.png" width="1000"/>
+</div>
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/impl-inital-function.png" width="1000"/>
+</div>
+
+**Kernel init**
+
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/impl-inital-function.png" width="1000"/>
+</div>
+Call the functions in the kernel as below
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/build-simple-kernel.png" width="1000"/>
+</div>
+
+Build and flash firmware to MCU, you will see the following result is successful
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/run-inital-project.png" width="1000"/>
+</div>
+
+**Example 1: Blink LED with Kernel timer:** I will code an example of LED blinking using a kernel timer  
+In this example, I will create an additional `task life` to demonstrate the blinking of the led indicator
+
+Create `Task ID`:
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/create-task-list.png" width="1000"/>
+</div>
+
+Create `Signal`:
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/create-signal.png" width="1000"/>
+</div>
+
+Create `Task Handler`:
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/create-task-life-h.png" width="1000"/>
+</div>
+
+At the `LIFE_SYSTEM_CHECK` signal I use the GPIO Output Toggle function to blink the LED
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/create-task-life-c.png" width="1000"/>
+</div>
+
+Initialize the task life as below  
+I use `timer_set(TASK_LIFE_ID, LIFE_SYSTEM_CHECK, 1000, TIMER_PERIODIC)`
+to set up so that every 1000ms will send a signal to the task_life_handler
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/create-task-life.png" width="1000"/>
+</div>
+
+Build and flash firmware to MCU, you will see the following result and LED will be blinking
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/run-task-life-demo.png" width="1000"/>
+</div>
+
+**Example 2: Build multitasking:** Build the basic application as follows:
+- Clear watchdog timer every 1000ms
+- Read sensor every 3000ms
+- After reading sensor data, send data to MQTT Broker
+
+The steps to initialize task - signal are similar to above
+I will give an example with the following images:  
+Create `Task List Table`:
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/create-task-list-table.png" width="1000"/>
+</div>
+
+Create `Signals`:
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/create-multi-signal.png" width="1000"/>
+</div>
+
+Hanler in `task_life_handler`:  
+When receiving `LIFE_SYSTEM_CHECK` signal from kernel, it will clear watdog and blink indicator led
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/task-life-handler.png" width="1000"/>
+</div>
+
+Hanler in `task_device_handler`:  
+Similarly, at the task device
+it will initialize the sensor (i.e. initialize the hardware) at the `DEV_SENSOR_INIT` signal. After successful initialization, for example, it will set a timer to send the `DEV_POLLING_REQ` signal to read the sensor. When reading data successfully, it will send signal to task cloud to send data to Cloud Server.
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/task-device-handler.png" width="1000"/>
+</div>
+
+Hanler in `task_cloud_handler`:  
+At the task cloud, it also handles the corresponding tasks at the `CLOUD_MQTT_INIT` and
+`CLOUD_MQTT_PUBLISH` signals
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/task-cloud-handler.png" width="1000"/>
+</div>
+
+Create multiple tasks at once with a function `task_create_table`  
+Here will also set to send initial messages when initializing the application
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/create-multi-task.png" width="1000"/>
+</div>
+
+Build and flash firmware to MCU, you will see the following result is successful
+<div style="text-align: center;">
+    <img src="images/template-stm32f103c8t6/run-multi-task.png" width="1000"/>
+</div>
 
 ### 5. References:
 | Topic | Link |
