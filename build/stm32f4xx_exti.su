@@ -1,0 +1,8 @@
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:103:6:EXTI_DeInit	0	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:119:6:EXTI_Init	12	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:175:6:EXTI_StructInit	0	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:190:6:EXTI_GenerateSWInterrupt	0	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:220:12:EXTI_GetFlagStatus	0	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:243:6:EXTI_ClearFlag	0	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:257:10:EXTI_GetITStatus	0	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c:281:6:EXTI_ClearITPendingBit	0	static

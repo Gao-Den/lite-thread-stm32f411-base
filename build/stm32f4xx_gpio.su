@@ -1,0 +1,14 @@
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:120:6:GPIO_DeInit	8	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:195:6:GPIO_Init	24	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:247:6:GPIO_StructInit	0	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:270:6:GPIO_PinLockConfig	8	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:316:9:GPIO_ReadInputDataBit	0	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:342:10:GPIO_ReadInputData	0	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:359:9:GPIO_ReadOutputDataBit	0	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:385:10:GPIO_ReadOutputData	0	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:405:6:GPIO_SetBits	0	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:426:6:GPIO_ResetBits	0	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:448:6:GPIO_WriteBit	0	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:473:6:GPIO_Write	0	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:489:6:GPIO_ToggleBits	0	static
+./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c:572:6:GPIO_PinAFConfig	8	static

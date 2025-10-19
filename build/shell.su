@@ -1,0 +1,6 @@
+./sources/app/shell.cpp:50:9:int32_t shell_reboot(uint8_t*)	8	static
+./sources/app/shell.cpp:83:9:int32_t shell_clear(uint8_t*)	8	static
+./sources/app/shell.cpp:56:9:int32_t shell_sys(uint8_t*)	8	static
+./sources/app/shell.cpp:89:9:int32_t shell_fatal(uint8_t*)	8	static
+./sources/app/shell.cpp:120:9:int32_t shell_log(uint8_t*)	8	static
+./sources/app/shell.cpp:155:9:int32_t shell_dbg(uint8_t*)	8	static

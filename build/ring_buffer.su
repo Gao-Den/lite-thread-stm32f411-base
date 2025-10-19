@@ -1,0 +1,6 @@
+./sources/lite-thread/common/container/ring_buffer.c:10:6:ring_buffer_char_init	0	static
+./sources/lite-thread/common/container/ring_buffer.c:21:10:ring_buffer_char_availble	0	static
+./sources/lite-thread/common/container/ring_buffer.c:25:6:ring_buffer_char_is_empty	0	static
+./sources/lite-thread/common/container/ring_buffer.c:29:6:ring_buffer_char_is_full	0	static
+./sources/lite-thread/common/container/ring_buffer.c:33:6:ring_buffer_char_put	0	static
+./sources/lite-thread/common/container/ring_buffer.c:53:9:ring_buffer_char_get	12	static

@@ -1,0 +1,13 @@
+./sources/sys/startup/mini_cpp.cpp:23:6:void __gnu_cxx::__verbose_terminate_handler()	0	static
+./sources/sys/startup/mini_cpp.cpp:34:17:void __cxa_pure_virtual()	0	static
+./sources/sys/startup/mini_cpp.cpp:38:17:void __cxa_deleted_virtual()	0	static
+./sources/sys/startup/mini_cpp.cpp:48:17:void __wrap___aeabi_unwind_cpp_pr0()	0	static
+./sources/sys/startup/mini_cpp.cpp:49:17:void __wrap___aeabi_unwind_cpp_pr1()	0	static
+./sources/sys/startup/mini_cpp.cpp:50:17:void __wrap___aeabi_unwind_cpp_pr2()	0	static
+./sources/sys/startup/mini_cpp.cpp:55:7:void* operator new(size_t)	0	static
+./sources/sys/startup/mini_cpp.cpp:59:7:void* operator new [](size_t)	0	static
+./sources/sys/startup/mini_cpp.cpp:63:6:void operator delete(void*)	0	static
+./sources/sys/startup/mini_cpp.cpp:67:6:void operator delete [](void*)	0	static
+./sources/sys/startup/mini_cpp.cpp:79:9:char* _sbrk(uint32_t)	0	static
+./sources/sys/startup/mini_cpp.cpp:95:5:int fputc(int, FILE*)	0	static
+./sources/sys/startup/mini_cpp.cpp:103:5:int ferror(FILE*)	0	static
