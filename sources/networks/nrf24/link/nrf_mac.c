@@ -16,8 +16,8 @@
 
 #define SENDING_MAC_FRAME_RETRY_COUNTER_MAX		(3)
 #define SENDING_MAC_PDU_RETRY_COUNTER_MAX		(3)
-#define SENDING_MAC_FRAME_RETRY_INTERVAL		(10)    /* send mac_frame retry interval (15 ms) MUST BE > Auto Retransmit Delay (4.4 ms)*/
-#define SENDING_MAC_PDU_RETRY_INTERVAL          (34)
+#define SENDING_MAC_FRAME_RETRY_INTERVAL		(15)
+#define SENDING_MAC_PDU_RETRY_INTERVAL          (40)
 
 /* mac retry transmit */
 static uint8_t mac_sending_frame_retry_counter = 0;
@@ -41,7 +41,7 @@ void task_nrf_mac_handler(lt_msg_t* msg) {
 	case NRF_MAC_INIT: {
         NRF_MAC_LOG("[nrf_mac] NRF_MAC_INIT\n");
         
-        /* init MAC sequence */
+        /* init mac sequence */
 		mac_sending_sequence = (uint8_t)rand();
 		mac_receiving_sequence = (uint8_t)rand();
 

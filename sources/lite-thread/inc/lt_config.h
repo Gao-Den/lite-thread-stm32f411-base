@@ -60,7 +60,7 @@ extern "C"
  * DEFINITION: log
  *
  *****************************************************************************/
-#define LT_LOG_FATAL_OBJECT_MAX_SIZE        (4)
+#define LT_LOG_FATAL_OBJECT_MAX_SIZE        (32)
 #define LT_LOG_KERNEL_EN                    (0)
 
 /*****************************************************************************

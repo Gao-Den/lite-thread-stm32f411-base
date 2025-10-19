@@ -134,15 +134,6 @@ int32_t shell_log(uint8_t* argv) {
     }
         break;
 
-    case '2': {
-        APP_LOG_ERROR(LOG_MQTT_DISCONNECTED);
-    }
-        break;
-
-    case '3': {
-    }
-        break;
-
     default: {
         APP_PRINT("[shell_log] unknown option !\n");
     }
