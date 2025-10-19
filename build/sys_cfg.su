@@ -1,0 +1,11 @@
+./sources/sys/sys_cfg.c:40:6:sys_cfg_common	8	static
+./sources/sys/sys_cfg.c:45:6:sys_cfg_clock	8	static
+./sources/sys/sys_cfg.c:56:6:sys_cfg_tick	24	static
+./sources/sys/sys_cfg.c:78:10:sys_stack_fill	0	static
+./sources/sys/sys_cfg.c:93:10:sys_stack_used	0	static
+./sources/sys/sys_cfg.c:101:10:sys_stack_get_size	0	static
+./sources/sys/sys_cfg.c:108:6:sys_ctrl_delay_us	24	static
+./sources/sys/sys_cfg.c:127:6:sys_ctrl_delay_ms	16	static
+./sources/sys/sys_cfg.c:132:6:sys_ctrl_reset	0	static
+./sources/sys/sys_cfg.c:136:6:sys_ctrl_independent_watchdog_init	8	static
+./sources/sys/sys_cfg.c:144:6:sys_ctrl_independent_watchdog_reset	8	static

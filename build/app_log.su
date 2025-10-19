@@ -1,0 +1,4 @@
+./sources/app/app_log.cpp:27:6:void app_log_init()	16	static
+./sources/app/app_log.cpp:38:6:void app_log_dbg(app_log_type_t, app_log_info_t)	40	static
+./sources/app/app_log.cpp:69:6:void app_log_dump()	40	static
+./sources/app/app_log.cpp:111:6:void app_log_erase()	24	static

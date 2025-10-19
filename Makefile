@@ -1,170 +1,137 @@
-##############################################################################
- # @author: GaoDen
- # @date:   03/05/2024
-##############################################################################
+###############################################################################
+# author: GaoDen
+# date: 10/09/2025
+###############################################################################
 
-# Include sources file
-include lite-thread/Makefile.mk
-include app/Makefile.mk
-include common/Makefile.mk
-include drivers/Makefile.mk
-include sys/Makefile.mk
-include libraries/Makefile.mk
-include networks/Makefile.mk
-
-# Utilitis define
-Print = @echo "~"
-print = @echo
-
-# Name of build PROJECT ex: lite-thread-stm32f411-base.bin
-NAME_MODULE = lite-thread-stm32f411-base
+NAME_MODULE	= lite-thread-stm32f411-base
 PROJECT = $(NAME_MODULE)
-OBJECTS_DIR = build
-TARGET = $(OBJECTS_DIR)/$(NAME_MODULE).axf
+OBJ_DIR = build
+TARGET = $(OBJ_DIR)/$(NAME_MODULE).axf
 
-OBJECTS = $(addprefix $(OBJECTS_DIR)/,$(notdir $(SOURCES_ASM:.s=.o)))
-OBJECTS += $(addprefix $(OBJECTS_DIR)/,$(notdir $(SOURCES:.c=.o)))
-OBJECTS += $(addprefix $(OBJECTS_DIR)/,$(notdir $(SOURCES_CPP:.cpp=.o)))
+include sources/lite-thread/Makefile.mk
+include sources/app/Makefile.mk
+include sources/common/Makefile.mk
+include sources/drivers/Makefile.mk
+include sources/sys/Makefile.mk
+include sources/libraries/Makefile.mk
+include sources/networks/Makefile.mk
 
-GCC_PATH		= $(HOME)/workspace/tools/gcc-arm-none-eabi-10.3-2021.10
-PROGRAMER_PATH		= $(HOME)/workspace/tools/STM32CubeProgrammer/bin
+# the compiler to use
+GCC_PATH = /mnt/d/GaoDen/dev/tools/gcc-arm-none-eabi-10.3-2021.10
+PROGRAMER_PATH = /mnt/d/GaoDen/dev/tools/STM32CubeProgrammer/bin
 
-# App start address, that need sync with declare in linker file and interrupt vector table.
-APP_START_ADDR_VAL = 0x08000000
+CC = $(GCC_PATH)/bin/arm-none-eabi-gcc
+CXX = $(GCC_PATH)/bin/arm-none-eabi-g++
+AR = $(GCC_PATH)/bin/arm-none-eabi-ar
+AS = $(GCC_PATH)/bin/arm-none-eabi-gcc -x assembler-with-cpp
+LD = $(GCC_PATH)/bin/arm-none-eabi-ld
+OBJCOPY = $(GCC_PATH)/bin/arm-none-eabi-objcopy
+OBJNM = $(GCC_PATH)/bin/arm-none-eabi-nm
+ARM_SIZE = $(GCC_PATH)/bin/arm-none-eabi-size
 
-OPTIMIZE_OPTION = -g -Os
+# build options
+OPTIMIZE_OPTION += -Os -g
+WARNING_OPTION	+= -Werror -Wno-missing-field-initializers
 
-LIBC		= $(GCC_PATH)/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a
-LIBM		= $(GCC_PATH)/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a
-LIBFPU		= $(GCC_PATH)/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a
-LIBRDPMON	= $(GCC_PATH)/arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdpmon.a
-LIBSTDCPP_NANO	= $(GCC_PATH)/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a
+# library source path (sources ".so, .a")
+LIBC = $(GCC_PATH)/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a
+LIBM = $(GCC_PATH)/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a
+LIBFPU = $(GCC_PATH)/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a
+LIBRDPMON = $(GCC_PATH)/arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdpmon.a
+LIBSTDCPP_NANO = $(GCC_PATH)/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a
 
-LIBGCC		= $(GCC_PATH)/lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/libgcc.a
-LIBGCOV		= $(GCC_PATH)/lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/libgcov.a
+LIBGCC = $(GCC_PATH)/lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/libgcc.a
+LIBGCOV = $(GCC_PATH)/lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/libgcov.a
 
 LIB_PATH += -L$(GCC_PATH)/arm-none-eabi/lib/thumb/v7e-m+fp/hard
 LIB_PATH += -L$(GCC_PATH)/lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard
 
-# The command for calling the compiler.
-CC		=	$(GCC_PATH)/bin/arm-none-eabi-gcc
-CPP		=	$(GCC_PATH)/bin/arm-none-eabi-g++
-AR		=	$(GCC_PATH)/bin/arm-none-eabi-ar
-AS		=	$(GCC_PATH)/bin/arm-none-eabi-gcc -x assembler-with-cpp
-LD 		= 	$(GCC_PATH)/bin/arm-none-eabi-ld
-OBJCOPY		=	$(GCC_PATH)/bin/arm-none-eabi-objcopy
-OBJNM		=	$(GCC_PATH)/bin/arm-none-eabi-nm
-ARM_SIZE	=	$(GCC_PATH)/bin/arm-none-eabi-size
+LDLIBS += $(LIBC) $(LIBM) $(LIBSTDCPP_NANO) $(LIBGCC) $(LIBGCOV) $(LIBFPU) $(LIBRDPMON)
 
-# Set the compiler CPU/FPU options.
-CPU = -mthumb -mcpu=cortex-m4
-FPU = -mfloat-abi=hard
+LDFLAGS	= -Map=$(OBJ_DIR)/$(PROJECT).map	\
+			--gc-sections	\
+			$(LIB_PATH)	\
 
-GENERAL_FLAGS +=			\
-		$(OPTIMIZE_OPTION)	\
-		-DNDEBUG	\
-		-DUSE_STDPERIPH_DRIVER	\
-		-DSTM32F411xE	\
-
-# C compiler flags
-CFLAGS +=	\
-		$(CPU)			\
-		$(FPU)			\
-		-ffunction-sections	\
-		-fdata-sections		\
-		-fstack-usage		\
-		-MD			\
-		-Wall			\
-		-Wno-enum-conversion	\
-		-Wno-redundant-decls	\
-		-std=c99		\
-		-c			\
-		$(GENERAL_FLAGS)	\
-
-# C++ compiler flags
-CPPFLAGS += $(CPU)			\
-		$(FPU)			\
-		-ffunction-sections	\
-		-fdata-sections		\
-		-fstack-usage		\
-		-fno-rtti		\
-		-fno-exceptions		\
-		-fno-use-cxa-atexit	\
-		-MD			\
-		-Wall			\
-		-std=c++11		\
-		-c			\
-		$(GENERAL_FLAGS)	\
+# object files
+OBJECTS += $(patsubst %.s, $(OBJ_DIR)/%.o, $(SOURCE_AS))
+OBJECTS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SOURCE_C))
+OBJECTS += $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SOURCE_CPP))
 
 # linker file
-LDFILE = sys/startup/stm32f411ce.ld
+LDFILE = sources/sys/startup/stm32f411ce.ld
 
-# linker flags
-LDFLAGS	=	-Map=$(OBJECTS_DIR)/$(PROJECT).map	\
-		--gc-sections	\
-		$(LIB_PATH)	\
-		$(LIBC) $(LIBM) $(LIBSTDCPP_NANO) $(LIBGCC) $(LIBGCOV) $(LIBFPU) $(LIBRDPMON)
+# define options
+APP_START_ADDR = 0x08000000
+APP_MODE += -DAPP_DEBUG
+DEFINE_OPTIONS += $(APP_MODE)	\
+				-DUSE_STDPERIPH_DRIVER	\
+				-DSTM32F411xE	\
+				
+# build flags
+GENERAL_FLAG += $(OPTIMIZE_OPTION)	\
+				$(WARNING_OPTION) \
+				$(INCLUDE_FLAGS)	\
+				$(DEFINE_OPTIONS)	\
+				-mthumb -mcpu=cortex-m4	\
+				-mfloat-abi=hard	\
+				-ffunction-sections	\
+				-fdata-sections	\
+				-fstack-usage	\
+				-MD	\
+				-Wall	\
+				-c	\
+				-fno-common
 
-all: build $(TARGET)
+CFLAGS += $(GENERAL_FLAG)	\
+			-std=c99	\
+			-Wno-enum-conversion	\
+			-Wno-redundant-decls	\
 
-build:
-	$(Print) CREATE $(OBJECTS_DIR) folder
-	@mkdir -p $(OBJECTS_DIR)
+CXXFLAGS += $(GENERAL_FLAG)	\
+			-std=c++11	\
+			-fno-rtti	\
+			-fno-exceptions	\
+			-fno-use-cxa-atexit	\
 
-$(TARGET): $(OBJECTS) $(LIBC) $(LIBM) $(LIBSTDCPP_NANO) $(LIBGCC) $(LIBGCOV) $(LIBFPU) $(LIBRDPMON)
-	$(Print) LD $@
+.PHONY: all
+all: create $(TARGET)
+
+create:
+	@echo "[Compiling sources]"
+	@mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o: %.s
+	@echo "~ AS $<"
+	@$(AS) $< -o $@
+
+$(OBJ_DIR)/%.o: %.c
+	@echo "~ CC $<"
+	@$(CC) -c $< -o $@ $(CFLAGS)
+
+$(OBJ_DIR)/%.o: %.cpp
+	@echo "~ CPP $<"
+	@$(CXX) -c $< -o $@ $(CXXFLAGS)
+
+$(TARGET): $(OBJECTS) $(LDLIBS)
+	@echo "\n[Linking objects]"
+	@$(foreach obj,$(OBJECTS),echo "$(notdir $(obj))";)
 	@$(LD) --entry reset_handler -T $(LDFILE) $(LDFLAGS) -o $(@) $(^)
-	$(Print) OBJCOPY $(@:.axf=.bin)
+
+	@echo OBJCOPY $(@:.axf=.bin)
 	@$(OBJCOPY) -O binary $(@) $(@:.axf=.bin)
-	@$(OBJCOPY) -O binary $(@) $(@:.axf=.out)
-	@$(OBJCOPY) -O binary $(@) $(@:.axf=.elf)
+	@$(OBJCOPY) -O ihex   $(@) $(@:.axf=.hex)
+	@cp $(@) $(@:.axf=.elf)
 	@$(ARM_SIZE) $(TARGET)
 
-$(OBJECTS_DIR)/%.o: %.c
-	$(Print) CC $@
-	@$(CC) $(CFLAGS) -o $@ $<
+.PHONY: flash
+flash:
+	@echo "flashing firmware $(NAME_MODULE).bin to target"
+	@sudo st-flash write $(TARGET:.axf=.bin) $(APP_START_ADDR)
+	@sudo st-flash reset
 
-$(OBJECTS_DIR)/%.o: %.cpp
-	$(Print) CXX $@
-	@$(CPP) $(CPPFLAGS) -o $@ $<
-
-$(OBJECTS_DIR)/%.o: %.s
-	$(Print) AS $@
-	@$(AS) $(CFLAGS) -o $@ $<
-
-# # For Linux
-# flash: all
-# 	$(PROGRAMER_PATH)/STM32_Programmer.sh -c port=SWD -w $(TARGET:.axf=.bin) $(APP_START_ADDR_VAL) -rst
-
-# clean:
-# 	$(Print) CLEAN $(OBJECTS_DIR) folder
-# 	@rm -rf $(OBJECTS_DIR)
-
-# For Windows
+.PHONY: clean
 clean:
-	$(Print) CLEAN $(OBJECTS_DIR) folder
-	@if exist build (rmdir /s /q $(OBJECTS_DIR) -p)
-
-flash: all
-	st-link_cli.exe -c SWD -P $(TARGET:.axf=.bin) $(APP_START_ADDR_VAL) -rst
-
-sym: $(TARGET)
-	$(Print) export object name $(<:.axf=.sym)
-	$(OBJNM) --size-sort --print-size $(<) >> $(<:.axf=.sym)
-
-view_sym:
-	cat $(OBJECTS_DIR)/$(NAME_MODULE).sym
-
-help:
-	$(print) "How to use?"
-	$(print) ""
-
-	$(print) "[make build] complile the code"
-	$(print) "[make flash] burn firmware via st-link"
-	$(print) "[make clean] clean build project folder"
-	$(print) "[make sym] create list symbol fromx objects file"
-	$(print) "[make view_sym] view list symbol size"
-	$(print) ""
+	rm -rf $(OBJ_DIR)
 
 # architecture options usage
 #--------------------------------------------------------------------
@@ -222,3 +189,28 @@ help:
 #|(Hard FP) | -mfpu=vfpv3-d16                            | /thumb   |
 #|          |                                            | /fpu     |
 #--------------------------------------------------------------------
+
+# optimization options usage
+#-------------------------------------------------------------------- 
+#| Option | Purpose / Use Case                            | Typical Use |
+#|---------|-----------------------------------------------|--------------|
+#| -O0     | no optimization (full debug info, fast build) | debugging / development |
+#|---------|-----------------------------------------------|--------------|
+#| -O1     | basic optimization without long compile time  | safe optimization |
+#|---------|-----------------------------------------------|--------------|
+#| -O2     | further optimization (balance size/speed)     | general release build |
+#|---------|-----------------------------------------------|--------------|
+#| -O3     | aggressive optimization (loop unrolling, etc) | performance-critical code |
+#|---------|-----------------------------------------------|--------------|
+#| -Ofast  | enable all -O3 + unsafe math optimizations     | high-speed, non-strict IEEE math |
+#|---------|-----------------------------------------------|--------------|
+#| -Os     | optimize for size (reduces code size)         | flash-limited MCUs |
+#|---------|-----------------------------------------------|--------------|
+#| -Og     | optimize for debugging (keep symbols, partial)| debug build with light opt |
+#|---------|-----------------------------------------------|--------------|
+#| -Oz     | (clang only) smaller than -Os                | N/A for GCC |
+#|---------|-----------------------------------------------|--------------|
+#| -flto   | link-time optimization across all units       | advanced release optimization |
+#|---------|-----------------------------------------------|--------------|
+#| -g      | include debug symbols                         | debug/release with trace |
+#|---------|-----------------------------------------------|--------------|

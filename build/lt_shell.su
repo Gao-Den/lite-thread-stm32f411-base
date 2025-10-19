@@ -1,0 +1,5 @@
+./sources/lite-thread/common/console/lt_shell.c:87:9:shell_help	32	static
+./sources/lite-thread/common/console/lt_shell.c:44:6:lt_shell_register	16	static
+./sources/lite-thread/common/console/lt_shell.c:24:6:lt_shell_init	24	static
+./sources/lite-thread/common/console/lt_shell.c:64:6:lt_shell_register_table	16	static
+./sources/lite-thread/common/console/lt_shell.c:80:6:lt_shell_getc	16	static

@@ -1,0 +1,37 @@
+build/misc.o: \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/misc.c \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/misc.h \
+ sources/sys/peripheral/peripheral_libraries/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
+ sources/sys/peripheral/peripheral_libraries/CMSIS/Include/core_cm4.h \
+ /mnt/d/GaoDen/dev/tools/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
+ /mnt/d/GaoDen/dev/tools/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/stdint.h \
+ /mnt/d/GaoDen/dev/tools/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_types.h \
+ /mnt/d/GaoDen/dev/tools/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/features.h \
+ /mnt/d/GaoDen/dev/tools/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/_newlib_version.h \
+ /mnt/d/GaoDen/dev/tools/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_intsup.h \
+ /mnt/d/GaoDen/dev/tools/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h \
+ sources/sys/peripheral/peripheral_libraries/CMSIS/Include/core_cmInstr.h \
+ sources/sys/peripheral/peripheral_libraries/CMSIS/Include/core_cmFunc.h \
+ sources/sys/peripheral/peripheral_libraries/CMSIS/Include/core_cmSimd.h \
+ sources/sys/peripheral/peripheral_libraries/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_conf.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_adc.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_crc.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_dbgmcu.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_dma.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_exti.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_flash.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_gpio.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_i2c.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_iwdg.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_pwr.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_rcc.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_rtc.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_sdio.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_spi.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_syscfg.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_tim.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_usart.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_wwdg.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/misc.h \
+ sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_flash_ramfunc.h

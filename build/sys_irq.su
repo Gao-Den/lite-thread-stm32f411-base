@@ -1,0 +1,15 @@
+./sources/sys/sys_irq.c:27:6:default_handler	0	static
+./sources/sys/sys_irq.c:31:6:nmi_handler	0	static
+./sources/sys/sys_irq.c:35:6:hardfault_handler	0	static
+./sources/sys/sys_irq.c:39:6:mem_manage_handler	0	static
+./sources/sys/sys_irq.c:43:6:bus_fault_handler	0	static
+./sources/sys/sys_irq.c:47:6:usage_fault_handler	0	static
+./sources/sys/sys_irq.c:51:6:svc_handler	0	static
+./sources/sys/sys_irq.c:55:6:debug_mon_handler	0	static
+./sources/sys/sys_irq.c:59:6:pendsv_handler	0	static
+./sources/sys/sys_irq.c:63:6:enable_interrupts	0	static
+./sources/sys/sys_irq.c:67:6:disable_interrupts	0	static
+./sources/sys/sys_irq.c:71:6:system_tick_handler	8	static
+./sources/sys/sys_irq.c:96:10:sys_ctrl_millis	8	static
+./sources/sys/sys_irq.c:104:6:usart1_irq_handler	16	static
+./sources/sys/sys_irq.c:110:6:exti8_handler	8	static
