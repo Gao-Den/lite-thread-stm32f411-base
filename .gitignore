@@ -1,6 +1,6 @@
 # ignore build output
-sources/build/
-sources/-p/
+build/
+-p/
 
 # ignore VSCode settings
 .vscode/

@@ -1,4 +1,0 @@
-./sources/lite-thread/common/log/lt_log.c:24:6:lt_log_init	32	static
-./sources/lite-thread/common/log/lt_log.c:43:6:lt_fatal_log	48	static
-./sources/lite-thread/common/log/lt_log.c:97:6:lt_fatal_log_dump	40	static
-./sources/lite-thread/common/log/lt_log.c:121:6:lt_fatal_log_reset	16	static

@@ -1,5 +1,0 @@
-./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/misc.c:111:6:NVIC_PriorityGroupConfig	0	static
-./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/misc.c:129:6:NVIC_Init	16	static
-./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/misc.c:173:6:NVIC_SetVectorTable	0	static
-./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/misc.c:192:6:NVIC_SystemLPConfig	0	static
-./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/misc.c:216:6:SysTick_CLKSourceConfig	0	static

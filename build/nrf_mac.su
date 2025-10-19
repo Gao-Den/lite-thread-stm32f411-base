@@ -1,2 +1,0 @@
-./sources/networks/nrf24/link/nrf_mac.c:235:9:nrf_mac_calc_frame_cs	0	static
-./sources/networks/nrf24/link/nrf_mac.c:39:6:task_nrf_mac_handler	32	static

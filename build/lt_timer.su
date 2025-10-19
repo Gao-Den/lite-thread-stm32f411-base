@@ -1,6 +1,0 @@
-./sources/lite-thread/src/lt_timer.c:34:6:timer_init	8	static
-./sources/lite-thread/src/lt_timer.c:104:9:get_timer_pool_free	0	static
-./sources/lite-thread/src/lt_timer.c:108:9:timer_set	32	static
-./sources/lite-thread/src/lt_timer.c:160:9:timer_remove	24	static
-./sources/lite-thread/src/lt_timer.c:214:6:lt_task_timer_handler	16	static
-./sources/lite-thread/src/lt_timer.c:200:6:timer_tick	8	static

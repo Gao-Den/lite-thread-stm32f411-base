@@ -1,5 +1,0 @@
-./sources/app/app.cpp:149:6:void flash_erase_log_fatal_sector()	0	static
-./sources/app/app.cpp:153:6:void flash_write_log_fatal(uint32_t, uint8_t*, uint32_t)	0	static
-./sources/app/app.cpp:157:6:void flash_read_log_fatal(uint32_t, uint8_t*, uint32_t)	0	static
-./sources/app/app.cpp:49:5:int app()	16	static
-./sources/app/app.cpp:141:6:void sys_irq_timer_10ms()	0	static
