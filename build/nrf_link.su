@@ -1,5 +1,0 @@
-./sources/networks/nrf24/link/nrf_link.c:54:6:nrf_link_fsm_idle	104	static
-./sources/networks/nrf24/link/nrf_link.c:23:6:task_nrf_link_handler	0	static
-./sources/networks/nrf24/link/nrf_link.c:27:6:nrf_link_fsm_init	8	static
-./sources/networks/nrf24/link/nrf_link.c:163:6:nrf_task_post_pure_msg	16	static
-./sources/networks/nrf24/link/nrf_link.c:172:6:nrf_task_post_common_msg	24	static

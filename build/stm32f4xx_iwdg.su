@@ -1,6 +1,0 @@
-./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c:125:6:IWDG_WriteAccessCmd	0	static
-./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c:145:6:IWDG_SetPrescaler	0	static
-./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c:158:6:IWDG_SetReload	0	static
-./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c:171:6:IWDG_ReloadCounter	0	static
-./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c:197:6:IWDG_Enable	0	static
-./sources/sys/peripheral/peripheral_libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c:226:12:IWDG_GetFlagStatus	0	static

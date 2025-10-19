@@ -74,7 +74,7 @@ extern void lt_init();
 /* active object */
 extern void task_init();
 extern void task_create(lt_task_t* task);
-extern void task_create_table(lt_task_t* lt_task_table);
+extern void task_create_table(lt_task_t* app_task_table);
 extern void task_post(task_id_t task_id, lt_msg_t* msg);
 extern void task_post_pure_msg(task_id_t des_task_id, uint8_t signal);
 extern void task_post_common_msg(task_id_t des_task_id, uint8_t signal, uint8_t* data, uint8_t len);
@@ -83,7 +83,7 @@ extern int task_run();
 
 /* polling object */
 extern void task_polling_create(lt_task_polling_t* task_polling);
-extern void task_polling_create_table(lt_task_polling_t* lt_task_table);
+extern void task_polling_create_table(lt_task_polling_t* task_polling_table);
 extern void task_polling_run();
 extern void task_polling_set_ability(task_id_t task_polling_id, uint8_t ability);
 

@@ -1,2 +1,0 @@
-./sources/lite-thread/common/console/task_console.c:15:6:task_console_handler	16	static
-./sources/lite-thread/common/console/task_console.c:62:6:task_polling_console_handler	24	static

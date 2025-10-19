@@ -107,9 +107,9 @@ void task_create(lt_task_t* task) {
     EXIT_CRITICAL();
 }
 
-void task_create_table(lt_task_t* lt_task_table) {
+void task_create_table(lt_task_t* app_task_table) {
     uint8_t size = 0;
-    while (lt_task_table[size].task_handler != (pf_task)0){
+    while (app_task_table[size].task_handler != (pf_task)0){
         size++;
     }
 
@@ -118,7 +118,7 @@ void task_create_table(lt_task_t* lt_task_table) {
     }
 
     for (uint8_t i = 0; i < size; i++) {
-        task_create(&lt_task_table[i]);
+        task_create(&app_task_table[i]);
     }
 }
 
@@ -223,10 +223,10 @@ void task_polling_create(lt_task_polling_t* task_polling) {
     EXIT_CRITICAL();
 }
 
-void task_polling_create_table(lt_task_polling_t* lt_task_polling_table) {
+void task_polling_create_table(lt_task_polling_t* task_polling_table) {
     uint8_t size = 0;
 
-    while (lt_task_polling_table[size].task_polling_handler != (pf_task_polling)0) {
+    while (task_polling_table[size].task_polling_handler != (pf_task_polling)0) {
         size++;
     }
     
@@ -235,7 +235,7 @@ void task_polling_create_table(lt_task_polling_t* lt_task_polling_table) {
     }
 
     for (uint8_t i = 0; i < size; i++) {
-        task_polling_create(&lt_task_polling_table[i]);
+        task_polling_create(&task_polling_table[i]);
     }
 }
 

@@ -1,5 +1,0 @@
-./sources/networks/nrf24/link/nrf_phy.c:35:6:task_nrf_phy_handler	16	static
-./sources/networks/nrf24/link/nrf_phy.c:136:6:nrf_phy_irq	8	static
-./sources/networks/nrf24/link/nrf_phy.c:184:6:nrf_phy_switch_prx_mode	8	static
-./sources/networks/nrf24/link/nrf_phy.c:193:6:nrf_phy_switch_ptx_mode	8	static
-./sources/networks/nrf24/link/nrf_phy.c:234:6:nrf_phy_send_directly	8	static

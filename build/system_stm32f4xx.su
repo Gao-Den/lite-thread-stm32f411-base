@@ -1,2 +1,0 @@
-./sources/sys/peripheral/peripheral_libraries/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c:476:6:SystemInit	0	static
-./sources/sys/peripheral/peripheral_libraries/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c:553:6:SystemCoreClockUpdate	0	static

@@ -1,4 +1,0 @@
-./sources/networks/nrf24/link/nrf_data.c:23:6:nrf_pdu_pool_init	16	static
-./sources/networks/nrf24/link/nrf_data.c:38:12:nrf_pdu_malloc	16	static
-./sources/networks/nrf24/link/nrf_data.c:53:6:nrf_pdu_free	8	static
-./sources/networks/nrf24/link/nrf_data.c:61:12:nrf_pdu_get	8	static
