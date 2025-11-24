@@ -258,5 +258,5 @@ Build and flash firmware to MCU, you will see the following result is successful
 | Topic | Link |
 | ------ | ------ |
 | Active Object Model | https://www.state-machine.com/doc/AN_Active_Objects_for_Embedded.pdf |
-| AK Embedded Base Kit | https://github.com/epcbtech/ak-base-kit-stm32l151 |
+| AK Embedded Base Kit | https://github.com/ak-embedded-software/ak-base-kit-stm32l151 |
 |Super Simple Tasker |https://github.com/QuantumLeaps/Super-Simple-Tasker|
