@@ -9,11 +9,10 @@
 #include "io_cfg.h"
 
 void led_init_func(led_t* led, pf_led_ctrl pf_led_on, pf_led_ctrl pf_led_off, uint8_t polling_unit) {
-
     led->blink_enable = LED_BLINK_DISABLE;
     led->status = LED_OFF;
     led->blink_duration = 0;
-    led->polling_unit = 0;
+    led->polling_counter = 0;
     led->polling_unit = polling_unit; /* depend on interrupt period for led polling */
 
     /* assign the pointer function to led driver */
@@ -38,7 +37,7 @@ void led_off(led_t* led) {
 void led_blink_reset(led_t* led) {
     led->blink_enable = LED_BLINK_DISABLE;
     led->blink_duration = 0;
-    led->polling_unit = 0;
+    led->polling_counter = 0;
 
     led->pf_led_off();
 }
@@ -46,12 +45,13 @@ void led_blink_reset(led_t* led) {
 void led_blink_set(led_t* led, uint16_t duration) {
     led->blink_enable = LED_BLINK_ENABLE;
     led->blink_duration = duration;
-    led->polling_unit = 0;
+    led->polling_counter = 0;
 }
 
-void led_set_static_on(led_t* led, uint8_t color) {
+void led_set_static_on(led_t* led) {
     led->blink_enable = LED_BLINK_DISABLE;
     led->status = LED_ON;
+    led->polling_counter = 0;
     led_on(led);
 }
 
@@ -68,20 +68,20 @@ void led_toggle(led_t* led) {
 
 void led_polling(led_t* led) {
     if (led->blink_enable == LED_BLINK_ENABLE) {
-        if (led->polling_unit == led->blink_duration) {
+        if (led->polling_counter == led->blink_duration) {
             if (led->status == LED_OFF) {
                 led->status = LED_ON;
                 led_on(led);
-                led->polling_unit = 0;
+                led->polling_counter = 0;
             }
             else if (led->status == LED_ON) {
                 led->status = LED_OFF;
                 led_off(led);
-                led->polling_unit = 0;
+                led->polling_counter = 0;
             }
         }
         else {
-            led->polling_unit += led->polling_unit;
+            led->polling_counter += led->polling_unit;
         }
     }
 }

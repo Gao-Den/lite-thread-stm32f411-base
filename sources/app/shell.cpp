@@ -47,6 +47,45 @@ cmd_line_t app_shell_table[] = {
     {(const int8_t*)0,              (pf_cmd_func)0,     (const uint8_t*)0,                          (const uint8_t*)0}
 };
 
+/******************************************************************************
+* app common shell utilities
+*******************************************************************************/
+uint8_t str_parser(char* str) {
+    strcpy(cmd_buffer, str);
+    str_list_len = 0;
+
+    uint8_t i = 0;
+    uint8_t str_list_index = 0;
+    uint8_t flag_insert_str = 1;
+
+    while (cmd_buffer[i] != 0 && cmd_buffer[i] != '\n' && cmd_buffer[i] != '\r') {
+        if (cmd_buffer[i] == ' ') {
+            cmd_buffer[i] = 0;
+            flag_insert_str = 1;
+        }
+        else if (flag_insert_str) {
+            str_list[str_list_index++] = &cmd_buffer[i];
+            flag_insert_str = 0;
+        }
+        i++;
+    }
+
+    cmd_buffer[i] = 0;
+
+    str_list_len = str_list_index;
+    return str_list_len;
+}
+
+char* str_parser_get_attr(uint8_t index) {
+    if (index < str_list_len) {
+        return str_list[index];
+    }
+    return NULL;
+}
+
+/******************************************************************************
+* app common shell functions
+*******************************************************************************/
 int32_t shell_reboot(uint8_t* argv) {
     (void)argv;
     sys_ctrl_reset();
