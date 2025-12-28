@@ -21,6 +21,10 @@
 
 #include "nrf_phy.h"
 
+/* nested critical section */
+static uint32_t critical_nesting = 0;
+static uint32_t original_primask = 0;
+
 /* counter of milliseconds since the application run */
 volatile uint32_t millis_current;
 
@@ -66,6 +70,29 @@ void enable_interrupts() {
 
 void disable_interrupts() {
     __disable_irq();
+}
+
+void enter_critical() {
+    uint32_t primask = __get_PRIMASK();
+    __disable_irq();
+
+    if (critical_nesting == 0) {
+        original_primask = primask;
+    }
+
+    critical_nesting++;
+}
+
+void exit_critical() {
+    if (critical_nesting > 0) {
+        critical_nesting--;
+        
+        if (critical_nesting == 0) {
+            if (original_primask == 0) {
+                __enable_irq();
+            }
+        }
+    }
 }
 
 void system_tick_handler() {

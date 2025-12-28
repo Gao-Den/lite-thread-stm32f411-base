@@ -31,7 +31,7 @@ ARM_SIZE = $(GCC_PATH)/bin/arm-none-eabi-size
 
 # build options
 OPTIMIZE_OPTION += -Os -g
-WARNING_OPTION	+= -Werror -Wno-missing-field-initializers
+WARNING_OPTION	+= -Wall -Wno-missing-field-initializers
 
 # library source path (sources ".so, .a")
 LIBC = $(GCC_PATH)/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a

@@ -16,6 +16,15 @@
 
 #include "task_list.h"
 
+/* common shell utilities */
+#define STR_LIST_MAX_SIZE               (8)
+#define STR_BUFFER_SIZE                 (128)
+static char cmd_buffer[STR_BUFFER_SIZE];
+static char* str_list[STR_LIST_MAX_SIZE];
+static uint8_t str_list_len;
+static uint8_t str_parser(char* str);
+static char* str_parser_get_attr(uint8_t);
+
 /* system shell command */
 int32_t shell_reboot(uint8_t* argv);
 int32_t shell_dbg(uint8_t* argv);
@@ -34,13 +43,13 @@ cmd_line_t app_shell_table[] = {
     {(const int8_t*)"sys",          shell_sys,          (const uint8_t*)"shell system",             (const uint8_t*)0},
     {(const int8_t*)"clear",        shell_clear,        (const uint8_t*)"clear screen",             (const uint8_t*)0},
     {(const int8_t*)"fatal",        shell_fatal,        (const uint8_t*)"fatal log",                (const uint8_t*)"try 'fatal l' for get fatal log, 'fatal r' for reset fatal log"},
-    {(const int8_t*)"dbg",          shell_dbg,          (const uint8_t*)"shell debug",              (const uint8_t*)0},
-    
+
     /***********************************************************************************************************************************************************************************/
     /* APP COMMAND */
     /***********************************************************************************************************************************************************************************/
+    {(const int8_t*)"dbg",          shell_dbg,          (const uint8_t*)"shell debug",              (const uint8_t*)0},
     {(const int8_t*)"log",          shell_log,          (const uint8_t*)"app log",                  (const uint8_t*)"try 'log l' for get app log, 'log r' for reset app log"},
-    
+
     /***********************************************************************************************************************************************************************************/
     /* END OF TABLE */
     /***********************************************************************************************************************************************************************************/
