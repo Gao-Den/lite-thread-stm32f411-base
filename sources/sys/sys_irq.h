@@ -28,6 +28,8 @@ extern void system_tick_handler();
 
 extern void enable_interrupts();
 extern void disable_interrupts();
+extern void enter_critical();
+extern void exit_critical();
 
 /* external interrupts */
 extern void usart1_irq_handler();

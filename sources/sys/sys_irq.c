@@ -122,9 +122,9 @@ void system_tick_handler() {
 
 uint32_t sys_ctrl_millis() {
 	volatile uint32_t ret;
-	__disable_irq();
+	ENTRY_CRITICAL();
 	ret = millis_current;
-	__enable_irq();
+	EXIT_CRITICAL();
 	return ret;
 }
 

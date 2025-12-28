@@ -36,15 +36,16 @@
 /*************************************************************************/
 /* console io pin map
 **************************************************************************/
-#define CONSOLE_GPIO_PORT               (GPIOA)
-#define CONSOLE_USART                   (USART1)
 #define CONSOLE_GPIO_CLOCK              (RCC_AHB1Periph_GPIOA)
 #define CONSOLE_CLOCK                   (RCC_APB2Periph_USART1)
+#define CONSOLE_GPIO_PORT               (GPIOA)
+#define CONSOLE_USART                   (USART1)
 #define CONSOLE_USART_IRQ               (USART1_IRQn)
 #define CONSOLE_TX_PIN                  (GPIO_Pin_9)
 #define CONSOLE_RX_PIN                  (GPIO_Pin_10)
 #define CONSOLE_TX_PINSOURCE            (GPIO_PinSource9)
 #define CONSOLE_RX_PINSOURCE            (GPIO_PinSource10)
+#define CONSOLE_USART_BAUDRATE         (115200)
 
 /*************************************************************************/
 /* external flash io pin map 

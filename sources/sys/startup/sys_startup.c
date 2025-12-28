@@ -68,6 +68,9 @@ void reset_handler(void) {
         *dest++ = 0;
     }
 
+    /* system get reason reset */
+    sys_ctrl_set_reset_reason(sys_ctrl_get_reset_reason());
+
     /*****************************************************************************/
     /* system config
     ******************************************************************************/
@@ -77,14 +80,14 @@ void reset_handler(void) {
 
     volatile unsigned i, cnt;
     
-	/* invoke all static constructors */
-	cnt = __preinit_array_end - __preinit_array_start;
-	for (i = 0; i < cnt; i++) {
+    /* invoke all static constructors */
+    cnt = __preinit_array_end - __preinit_array_start;
+    for (i = 0; i < cnt; i++) {
         __preinit_array_start[i]();
     }
-		
-	cnt = __init_array_end - __init_array_start;
-	for (i = 0; i < cnt; i++) {
+
+    cnt = __init_array_end - __init_array_start;
+    for (i = 0; i < cnt; i++) {
         __init_array_start[i]();
     }
     
@@ -93,7 +96,11 @@ void reset_handler(void) {
 
     __enable_irq();
 
-    /* go to the main application */
+    /* system info */
+    sys_ctrl_update_info();
+    sys_ctrl_show_info();
+
+    /* main application */
     app();
 }
 

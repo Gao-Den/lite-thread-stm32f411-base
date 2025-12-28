@@ -15,14 +15,40 @@
 #include <stdint.h>
 #include "lt_console.h"
 
-#define SYS_PRINT(fmt, ...)			LT_LOG((const char*)fmt, ##__VA_ARGS__)
-#define CONSOLE_BAUDRATE			(115200)
+#define SYS_PRINT(fmt, ...)            LT_LOG((const char*)fmt, ##__VA_ARGS__)
 
 typedef enum {
-	SYS_IRQ_PRIO_SYSTEM_TICK = 1,
-	SYS_IRQ_PRIO_USART1,
-	SYS_IRQ_PRIO_NRF24,
+    SYS_IRQ_PRIO_SYSTEM_TICK = 1,
+    SYS_IRQ_PRIO_USART1,
+    SYS_IRQ_PRIO_NRF24,
 } system_irq_prio_t;
+
+typedef enum {
+    SYS_RESET_UNKNOWN = 0,
+    SYS_RESET_POWER_ON,
+    SYS_RESET_PIN_RESET,
+    SYS_RESET_SOFTWARE_RESET,
+    SYS_RESET_IWDG_RESET,
+    SYS_RESET_WWDG_RESET,
+    SYS_RESET_LOW_POWER_RESET,
+    SYS_RESET_BROWN_OUT_RESET
+} sys_reset_reason_t;
+
+typedef struct {
+    uint32_t cpu_clock;
+    uint32_t tick;
+    uint32_t console_baudrate;
+    uint32_t flash_used;
+    uint32_t ram_used;
+    uint32_t data_init_size;
+    uint32_t data_non_init_size;
+    uint32_t stack_avail;
+    uint32_t heap_avail;
+    uint32_t ram_other;
+    uint8_t reboot_reason;
+} system_info_t;
+
+extern system_info_t system_info;
 
 /******************************************************************************
 * system configurate functions

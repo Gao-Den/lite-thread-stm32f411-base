@@ -338,6 +338,6 @@ void io_init() {
 	spi2_init();
 
     /* usart1_init */
-    usart1_init(CONSOLE_BAUDRATE);
+    usart1_init(CONSOLE_USART_BAUDRATE);
     lt_console_init(usart1_put_char);
 }

@@ -24,6 +24,11 @@ extern void sys_ctrl_independent_watchdog_init();
 extern void sys_ctrl_independent_watchdog_reset();
 extern void sys_ctrl_reset();
 
+extern uint8_t sys_ctrl_get_reset_reason();
+extern void sys_ctrl_set_reset_reason(uint8_t reason);
+extern void sys_ctrl_update_info();
+extern void sys_ctrl_show_info();
+
 #ifdef __cplusplus
 }
 #endif
