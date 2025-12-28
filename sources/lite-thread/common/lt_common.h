@@ -20,8 +20,8 @@
 #include "lt_log.h"
 #include "lt_console.h"
 
-#define ENTRY_CRITICAL()            disable_interrupts()
-#define EXIT_CRITICAL()             enable_interrupts()
+#define ENTRY_CRITICAL()            enter_critical()
+#define EXIT_CRITICAL()             exit_critical()
 
 typedef void (*pf_lt_ctrl_common)();
 typedef void (*pf_lt_ctrl_delay)(uint32_t);
