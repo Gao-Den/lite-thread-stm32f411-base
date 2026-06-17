@@ -41,15 +41,15 @@ void lt_log_init(pf_log_flash_read flash_read, pf_log_flash_write flash_write, p
 }
 
 void lt_fatal_log(const char* type, uint8_t code) {
+    LT_LOG("\n");
+    LT_LOG("-> FATAL ERROR !\n");
+    LT_LOG("fatal_type: %s \tfatal_code: 0x%02X\n\n", type, code);
+
     if ((pf_flash_read == (pf_log_flash_read)0) || (pf_flash_write == (pf_log_flash_read)0)) {
         return;
     }
 
     ENTRY_CRITICAL();
-
-    LT_LOG("\n");
-    LT_LOG("-> FATAL ERROR !\n");
-    LT_LOG("fatal_type: %s \tfatal_code: 0x%02X\n\n", type, code);
 
     /* get active object info */
     lt_msg_t current_active_object = *(lt_msg_t*)get_current_active_object();
