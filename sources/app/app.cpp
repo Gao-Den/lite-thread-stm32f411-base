@@ -51,7 +51,7 @@ int app() {
     * hardware init
     *******************************************************************************/
     /* led init */
-    led_init_func(&led_life, led_life_on, led_life_off, 10);
+    led_init_func(&led_life, led_life_on, led_life_off);
 
     /* independent watchdog init */
     sys_ctrl_independent_watchdog_init();
@@ -139,7 +139,7 @@ void app_start_timer() {
  * used for led, button polling
  */
 void sys_irq_timer_10ms() {
-    led_polling(&led_life);
+    led_polling(&led_life, 10);
 }
 
 /* flash log

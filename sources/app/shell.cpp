@@ -161,7 +161,7 @@ int32_t shell_fatal(uint8_t* argv) {
     }
         break;
     }
-    
+
     return 0;
 }
 
@@ -187,7 +187,7 @@ int32_t shell_log(uint8_t* argv) {
     }
         break;
     }
-    
+
     return 0;
 }
 

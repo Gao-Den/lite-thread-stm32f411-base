@@ -26,11 +26,11 @@ void led_life_init() {
 }
 
 void led_life_on() {
-	GPIO_SetBits(LED_LIFE_IO_PORT, LED_LIFE_IO_PIN);
+	GPIO_ResetBits(LED_LIFE_IO_PORT, LED_LIFE_IO_PIN);
 }
 
 void led_life_off() {
-	GPIO_ResetBits(LED_LIFE_IO_PORT, LED_LIFE_IO_PIN);
+	GPIO_SetBits(LED_LIFE_IO_PORT, LED_LIFE_IO_PIN);
 }
 
 /******************************************************************************
