@@ -16,8 +16,8 @@
 
 #define LED_BLINK_ENABLE        (0x01)
 #define LED_BLINK_DISABLE       (0x00)
-#define LED_ON                  (0x01)
-#define LED_OFF                 (0x00)
+#define LED_STATUS_ON           (0x01)
+#define LED_STATUS_OFF          (0x00)
 
 typedef void (*pf_led_ctrl)();
 
@@ -25,24 +25,24 @@ typedef struct {
     /* led attributes */
     uint8_t blink_enable;
     uint8_t status;
-    uint16_t blink_duration;
 
     /* led control functions */
     pf_led_ctrl pf_led_on;
     pf_led_ctrl pf_led_off;
 
-    /* for polling */
+    /* led blink */
     uint16_t polling_counter;
-    uint8_t polling_unit;
+    uint16_t t_on;
+    uint16_t period;
 } led_t;
 
 /* led functions */
-extern void led_init_func(led_t* led, pf_led_ctrl pf_led_on, pf_led_ctrl pf_led_off, uint8_t polling_unit); 
+extern void led_init_func(led_t* led, pf_led_ctrl pf_led_on, pf_led_ctrl pf_led_off); 
 extern void led_toggle(led_t* led);
 extern void led_set_static_on(led_t* led);
-extern void led_blink_set(led_t* led, uint16_t duration);
+extern void led_blink_set(led_t* led, uint16_t t_on, uint16_t t_off);
 extern void led_blink_reset(led_t* led);
-extern void led_polling(led_t* led);
+extern void led_polling(led_t* led, uint16_t tick);
 
 #ifdef __cplusplus
 }
