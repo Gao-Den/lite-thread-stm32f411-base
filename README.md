@@ -154,10 +154,8 @@ Create common functions to run the kernel
 
 **Kernel init**
 
-<div style="text-align: center;">
-    <img src="docs/images/template-stm32f103c8t6/impl-inital-function.png" width="1000"/>
-</div>
 Call the functions in the kernel as below
+
 <div style="text-align: center;">
     <img src="docs/images/template-stm32f103c8t6/build-simple-kernel.png" width="1000"/>
 </div>
