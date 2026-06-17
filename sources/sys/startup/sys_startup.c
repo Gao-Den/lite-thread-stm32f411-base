@@ -41,22 +41,15 @@ void reset_handler(void) {
     /* MUST BE disable irq */
     __disable_irq();
 
-    /* fill stack section */
-    sys_stack_fill();
-
     /* call the system init function */
     SystemInit();
-
-    uint32_t *src, *dest;
 
     /*****************************************************************************/
     /* copy the data segment initializers from flash to SRAM
     ******************************************************************************/
-    /* pointer start address in flash */
-    src = &_sidata;
-
-    /* pointer start address in sram */
-    dest = &_sdata;
+    volatile uint32_t *src = &_sidata; /* pointer start address in flash */
+    volatile uint32_t *dest = &_sdata; /* pointer start address in sram */
+    volatile unsigned i, cnt;
 
     while (dest < &_edata) {
         *dest++ = *src++;
@@ -78,8 +71,6 @@ void reset_handler(void) {
     sys_cfg_clock();
     sys_cfg_tick();
 
-    volatile unsigned i, cnt;
-    
     /* invoke all static constructors */
     cnt = __preinit_array_end - __preinit_array_start;
     for (i = 0; i < cnt; i++) {
@@ -90,7 +81,7 @@ void reset_handler(void) {
     for (i = 0; i < cnt; i++) {
         __init_array_start[i]();
     }
-    
+
     /* io init */
     io_init();
 
@@ -99,6 +90,9 @@ void reset_handler(void) {
     /* system info */
     sys_ctrl_update_info();
     sys_ctrl_show_info();
+
+    /* fill stack section */
+    sys_stack_fill();
 
     /* main application */
     app();
