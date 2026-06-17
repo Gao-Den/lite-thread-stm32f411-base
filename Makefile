@@ -18,7 +18,7 @@ include sources/networks/Makefile.mk
 
 # the compiler to use
 GCC_PATH = /mnt/d/GaoDen/dev/tools/gcc-arm-none-eabi-10.3-2021.10
-PROGRAMER_PATH = /mnt/d/GaoDen/dev/tools/STM32CubeProgrammer/bin
+PROGRAMER_PATH = /home/gaoden/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin
 
 CC = $(GCC_PATH)/bin/arm-none-eabi-gcc
 CXX = $(GCC_PATH)/bin/arm-none-eabi-g++
@@ -124,10 +124,9 @@ $(TARGET): $(OBJECTS) $(LDLIBS)
 	@$(ARM_SIZE) $(TARGET)
 
 .PHONY: flash
-flash:
+flash: all
 	@echo "flashing firmware $(NAME_MODULE).bin to target"
-	@sudo st-flash write $(TARGET:.axf=.bin) $(APP_START_ADDR)
-	@sudo st-flash reset
+	$(PROGRAMER_PATH)/STM32_Programmer.sh -c port=SWD -w $(TARGET:.axf=.bin) $(APP_START_ADDR) -rst
 
 .PHONY: clean
 clean:
