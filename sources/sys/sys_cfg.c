@@ -42,6 +42,9 @@ extern uint32_t _estack;
 void sys_cfg_common() {
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
+
+    /* fatal fault set mask */
+    SCB->SHCSR |= (SCB_SHCSR_MEMFAULTENA_Msk | SCB_SHCSR_BUSFAULTENA_Msk | SCB_SHCSR_USGFAULTENA_Msk);
 }
 
 void sys_cfg_clock() {
