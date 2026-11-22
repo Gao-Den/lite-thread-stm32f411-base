@@ -82,7 +82,7 @@ extern uint8_t get_common_msg_free();
 *******************************************************************************/
 typedef struct {
     lt_msg_t msg_header;
-    uint8_t data_size;
+    uint32_t data_size;
     uint8_t* data;
 } lt_dynamic_msg_t;
 
